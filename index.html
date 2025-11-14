@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bento Grid - Ejemplo con Grid anidado</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="vars.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="site-title">Bento Grid — Diseño responsive</h1>
+      <p class="site-sub">3 columnas arriba / 1 columna debajo de 700px · modo claro/oscuro</p>
+      <button id="toggle-theme" aria-pressed="false">Cambiar tema</button>
+    </div>
+  </header>
+
+  <main class="wrap main-grid" role="main" aria-label="Layout tipo Bento">
+
+    <!-- Izquierda -->
+    <section class="bento bento--left" aria-label="Columna izquierda">
+      <div class="bento__inner">
+        <article class="card card--big">
+          <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?q=80&w=1400&auto=format&fit=crop&crop=faces" alt="Paisaje montañoso" loading="lazy">
+          <div class="card__meta">
+            <h2>Viajes y Naturaleza</h2>
+            <p>Escapadas perfectas para reconectar con el aire libre.</p>
+          </div>
+        </article>
+
+        <article class="card card--small">
+          <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070dd9?q=80&w=1200&auto=format&fit=crop&crop=faces" alt="Café y libreta" loading="lazy">
+          <div class="card__meta">
+            <h3>Notas de viaje</h3>
+          </div>
+        </article>
+
+        <article class="card card--wide">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop&crop=faces" alt="Camino en bosque" loading="lazy">
+          <div class="card__meta">
+            <h3>Rutas recomendadas</h3>
+            <p>7 rutas para principiantes.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Centro -->
+    <section class="bento bento--center" aria-label="Columna central">
+      <div class="bento__inner">
+        <article class="hero">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop&crop=faces" alt="Playa al atardecer" loading="lazy">
+          <div class="hero__content">
+            <h2>Escapada del mes</h2>
+            <p>Descubre destinos secretos para noviembre.</p>
+            <a class="btn" href="#">Ver guía</a>
+          </div>
+        </article>
+
+        <div class="grid-mini">
+          <article class="tile tile--tall">
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop&crop=faces" alt="Cabaña" loading="lazy">
+            <div class="tile__meta">Alojamiento</div>
+          </article>
+
+          <article class="tile">
+            <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?q=80&w=1200&auto=format&fit=crop&crop=faces" alt="Plato de comida" loading="lazy">
+            <div class="tile__meta">Gastronomía</div>
+          </article>
+
+          <article class="tile tile--span">
+            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1600&auto=format&fit=crop&crop=faces" alt="Mapa" loading="lazy">
+            <div class="tile__meta">Mapas interactivos</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Derecha -->
+    <aside class="bento bento--right" aria-label="Columna derecha">
+      <div class="bento__inner">
+        <div class="small-grid">
+          <article class="mini mini--1">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop&crop=faces" alt="Actividad" loading="lazy">
+            <div>
+              <h4>Eventos</h4>
+              <p>Agenda local</p>
+            </div>
+          </article>
+
+          <article class="mini mini--2">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop&crop=faces" alt="Tienda" loading="lazy">
+            <div>
+              <h4>Tienda</h4>
+              <p>Productos seleccionados</p>
+            </div>
+          </article>
+
+          <article class="mini mini--3">
+            <img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?q=80&w=800&auto=format&fit=crop&crop=faces" alt="Newsletter" loading="lazy">
+            <div>
+              <h4>Newsletter</h4>
+              <p>Suscríbete</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="cta">
+          <h3>Planifica tu viaje</h3>
+          <p>Calcula presupuesto y tiempo.</p>
+          <a class="btn btn--ghost" href="#">Comenzar</a>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer class="site-footer wrap">
+    <p>© 2025 — Ejemplo Bento Grid. Hecho con CSS Grid anidado y variables.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
