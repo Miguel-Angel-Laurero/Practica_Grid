@@ -2,39 +2,28 @@
   --max-width: 1200px;
   --gap: 1rem;
   --radius: 12px;
-
   --font-sans: 'Inter', system-ui;
   --font-display: 'Inter';
 
+  /* Modo Claro */
   --bg: #ffffff;
-  --card-bg: rgba(15,23,42,0.02); /* sutil sobre luz */
-  --surface: #fbfbfd;
+  --card-bg: #f3f4f6;
+  --surface: #e5e7eb;
   --muted: #6b7280;
   --text: #0f172a;
   --accent: #0ea5a4;
   --accent-2: #7c3aed;
-  --card-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+  --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b1020;
-    --card-bg: rgba(255,255,255,0.03); /* sutil sobre oscuro */
-    --surface: #071026;
-    --muted: #9aa4b2;
-    --text: #e6eef8;
-    --accent: #2dd4bf;
-    --accent-2: #b084fc;
-    --card-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
-  }
-}
-
-:root.theme-dark {
+/* Este es el que activa el botón de JS */
+html.theme-dark {
   --bg: #0b1020;
-  --card-bg: rgba(255,255,255,0.03);
-  --surface: #071026;
+  --card-bg: #161e31;
+  --surface: #1f2937;
   --muted: #9aa4b2;
   --text: #e6eef8;
   --accent: #2dd4bf;
   --accent-2: #b084fc;
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
