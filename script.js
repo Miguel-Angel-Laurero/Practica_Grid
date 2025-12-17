@@ -2,9 +2,7 @@ document.getElementById('toggle-theme').addEventListener('click', () => {
   document.documentElement.classList.toggle('theme-dark');
 });
 
-/*------------------------------
-Fade out dinamico
-------------------------------*/
+/* Fade out dinamico */
 
 // Seleccionamos TODAS las imágenes del layout
 const images = document.querySelectorAll('article');

@@ -1,93 +1,39 @@
-/* Reset ligero */
+/* ================= RESET ================= */
 * { box-sizing: border-box; }
-html,body { height:100%; }
+html, body { height: 100%; }
+
 body {
-  margin:0;
+  margin: 0;
   font-family: var(--font-sans, system-ui, Arial);
   color: var(--text);
   background: linear-gradient(180deg, var(--bg), var(--surface));
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.35;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.35;
 }
 
-/* Contenedor central */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ================= LAYOUT ================= */
 .wrap {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 1rem;
 }
 
-/* Header */
-.site-header { padding: 1.25rem 0; }
-.site-title {
-  font-family: var(--font-display, 'Playfair Display', 'Arial', serif);
-  margin:0 0 .25rem 0;
-  font-weight:700;
-  letter-spacing:-0.02em;
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
-}
-.site-sub { margin:0; color:var(--muted); font-size:.95rem; }
-#toggle-theme { margin-top:.6rem; padding:.45rem .6rem; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:transparent; cursor:pointer; }
-
-/* Layout principal: 3 columnas -> apilado debajo de 700px */
 .main-grid {
   display: grid;
   gap: var(--gap);
   grid-template-columns: 1fr 2fr 1.5fr;
-  align-items: start;
   margin-top: 1.25rem;
 }
 
-@media (max-width: 700px) {
-  .main-grid { grid-template-columns: 1fr; }
-}
-
-/* Moved from index.html: ajustes para balancear columnas y casillas */
-.main-grid{
-  display:grid;
-  grid-template-columns: 320px minmax(480px, 1fr) 300px;
-  gap:18px;
-  align-items:start;
-}
-
-/* Mejor reparto de casillas en el centro (más control sobre spans) */
-.grid-mini{
-  display:grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap:12px;
-  align-items:start;
-}
-.tile{ height:140px; border-radius:10px; overflow:hidden; display:block; }
-.tile--tall{ grid-row: span 2; height:100%; }
-.tile--span{ grid-column: span 4; height:120px; }
-.tile--wide{ grid-column: span 2; }
-
-/* Ajustes de tarjetas para mantener proporciones más uniformes */
-.card--big{ min-height:320px; display:block; }
-.card--wide{ height:160px; }
-.card--small{ height:140px; }
-
-/* Pequeños refinamientos para que las columnas mantengan jerarquía visual */
-.bento__inner{ display:flex; flex-direction:column; gap:14px; }
-.cta{ margin-top:12px; }
-
-/* Responsive: pasar a 2 columnas y finalmente 1 columna */
-@media (max-width:1100px){
-  .main-grid{ grid-template-columns: 1fr 360px; }
-  .bento--left{ order:1 }
-  .bento--center{ order:2 }
-  .bento--right{ order:3 }
-  .grid-mini{ grid-template-columns: repeat(3,1fr) }
-  .tile--span{ grid-column: span 3; }
-}
-@media (max-width:700px){
-  .main-grid{ grid-template-columns: 1fr; }
-  .grid-mini{ grid-template-columns: repeat(2,1fr) }
-  .tile--span{ grid-column: span 2; }
-}
-
-/* Estilos comunes para cada columna */
+/* ================= BENTO ================= */
 .bento {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
   border-radius: var(--radius);
@@ -95,120 +41,184 @@ body {
   box-shadow: var(--card-shadow);
 }
 
-.bento__inner { display:block; }
-
-/* -----------------
-   Columna izquierda: un grid interior vertical
-   ----------------- */
-.bento--left .bento__inner {
-  display:grid;
-  gap:.75rem;
-  grid-template-columns: 1fr;
-  grid-auto-rows: auto;
-}
-.card { overflow:hidden; border-radius: 10px; background: linear-gradient(180deg,var(--surface), rgba(255,255,255,0.02)); }
-.card img { width:100%; height:60%; object-fit:cover; display:block; box-shadow: var(--card-shadow); }
-.card__meta {
-  padding: .75rem;
-  color: var(--muted);
-  background-color: var(--card-bg, rgba(0,0,0,0.2));
-  background-clip: padding-box;
-  width:100%;
-  z-index:1;
-}
-.card--big { height: 520px; }
-.card--small { height: 140px; }
-.card--wide { height: 160px; }
-
-/* -----------------
-   Columna central: grid anidado con spans
-   ----------------- */
-.bento--center .bento__inner {
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(120px, auto);
+.bento__inner {
+  display: grid;
   gap: .75rem;
 }
 
-/* Hero ocupa toda la anchura de la columna central */
+/* COLUMNA IZQUIERDA */
+.bento--left .bento__inner {
+  grid-template-columns: 1fr;
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(180deg,var(--surface), rgba(255,255,255,0.02));
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.card__meta {
+  padding: .75rem;
+  color: var(--muted);
+}
+
+/* COLUMNA CENTRO */
+.bento--center .bento__inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+  grid-auto-flow: dense; /* 👈 CLAVE */
+}
+
+/* Hero */
 .hero {
+  position: relative;
   grid-column: 1 / -1;
-  position:relative;
-  height: 320px;
   border-radius: 12px;
-  overflow:hidden;
+  overflow: hidden;
 }
-.hero img { width:100%; height:100%; object-fit:cover; display:block; }
-.hero__content { position:absolute; left:1rem; bottom:1rem; color: white; text-shadow: 0 3px 12px rgba(0,0,0,0.35); }
-.hero__content h2 { margin:0 0 .25rem 0; font-size:1.35rem; }
-.hero__content p { margin:0; }
 
-/* Botones */
-.btn { display:inline-block; margin-top:.5rem; padding:.5rem .75rem; border-radius:8px; background:var(--accent); color:white; text-decoration:none; font-weight:600; }
-.btn--ghost { background: transparent; color: var(--text); border:1px solid rgba(0,0,0,0.06); }
+.hero img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
 
-/* Grid-mini: 6 columnas internas; algunas celdas hacen span */
-.grid-mini { grid-column: 1 / -1; display:grid; grid-template-columns: repeat(6, 1fr); gap:.5rem; }
-.tile { border-radius:10px; overflow:hidden; min-height:120px; display:flex; align-items:flex-end; position:relative; }
-.tile img{ width:100%; height:100%; object-fit:cover; display:block; }
-.tile__meta{ padding:.6rem; position:absolute; left:0; bottom:0; right:0; color:white; background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.05)); }
-.tile--tall { grid-row: span 3; grid-column: span 2; }
+.hero__content {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  color: white;
+}
+
+/* ================= MINI GRID ================= */
+.grid-mini {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: .5rem;
+  grid-auto-rows: minmax(80px, auto);
+}
+
+.tile {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+}
+
+.tile__meta {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: .5rem;
+  color: white;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.4));
+}
+
+.tile--tall { grid-column: span 2; grid-row: span 4; aspect-ratio: auto; }
+.tile--span { grid-column: span 3; grid-row: span 3; }
+.tile--wide { grid-column: span 6; aspect-ratio: 6 / 1; }
 .tile--mini { grid-column: span 2; }
-.tile--wide { grid-column: span 6; height:60px}
-.tile--span { grid-column: 3 / 7; }
 
-/* -----------------
-   Columna derecha: pequeños bloques en rejilla
-   ----------------- */
-.bento--right .bento__inner { display:grid; gap:.75rem; }
-.small-grid { display:grid; grid-template-columns: 1fr 1fr; gap:.5rem; }
-.mini { border-radius:8px; overflow:hidden; padding:.5rem; background: linear-gradient(180deg, var(--surface), rgba(0,0,0,0.02)); display:flex; gap:.5rem; align-items:center; }
-.mini img { width:72px; height:72px; object-fit:cover; border-radius:8px; flex:0 0 72px; }
-.mini h4 { margin:0; font-size:1rem; }
-
-.cta { padding: .75rem; margin-top:.75rem; border-radius:10px; background: linear-gradient(180deg, rgba(0,0,0,0.03), transparent); }
-
-/* Footer */
-.site-footer { padding:1.25rem 0; color:var(--muted); }
-
-
-/* Fade dinámico al salir del viewport */
-article.fade-out {
-  opacity: 0;
-  filter: blur(2px);
-  transition: opacity .5s ease, filter .5s ease;
+/* COLUMNA DERECHA  */
+.bento--right .bento__inner {
+  grid-template-columns: 1fr;
 }
 
-article.fade-visible {
-  opacity: 1;
-  filter: blur(0px);
-  transition: opacity .5s ease, filter .5s ease;
+.small-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
 }
 
-/* -----------------
-   Responsive adjustments under 700px
-   ----------------- */
+.mini {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  padding: .5rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--surface), rgba(0,0,0,0.02));
+}
+
+.mini img {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+}
+
+/* BOTONES  */
+.btn {
+  display: inline-block;
+  padding: .5rem .75rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+}
+
+/* FOOTER */
+.site-footer {
+  padding: 1.25rem 0;
+  color: var(--muted);
+}
+
+/* RESPONSIVE */
+
+/* Tablet */
+@media (max-width:1100px) {
+  .main-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bento--right {
+    grid-column: 1 / -1;
+  }
+
+  .grid-mini {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tile--wide {
+    grid-column: span 3;
+    aspect-ratio: 3 / 1;
+  }
+}
+
+/* Mobile */
 @media (max-width:700px) {
-  .card--big, .card--wide { height: 220px; }
-  .card--small { height: 120px; }
-  .hero { height: 220px; }
 
-  /* central grid -> stack internal mini-grid vertically for mobile */
-  .bento--center .bento__inner { grid-template-columns: 1fr; }
-  .grid-mini { grid-template-columns: 1fr; }
-  .tile--tall { grid-row: auto; }
-  .tile--span { grid-column: auto; }
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
 
-  .small-grid { grid-template-columns: 1fr; }
+  .bento__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid-mini {
+    grid-template-columns: 1fr;
+  }
+
+  .tile,
+  .tile--tall,
+  .tile--wide,
+  .tile--mini {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .small-grid {
+    grid-template-columns: 1fr;
+  }
 }
-
-/* Small visual polish for dark mode when forced by class */
-:root.theme-dark, .theme-dark {
-  --card-shadow: 0 8px 30px rgba(2,6,23,0.55);
-}
-
-/* Accessibility: focus styles */
-button:focus, a:focus { outline: 3px solid rgba(14,165,164,0.18); outline-offset:3px; }
-
-/* Image performance hint */
-img { display:block; max-width:100%; height:auto; }
