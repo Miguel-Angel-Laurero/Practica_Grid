@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+/* RESET */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 
@@ -19,7 +19,7 @@ img {
   object-fit: cover;
 }
 
-/* ================= LAYOUT ================= */
+/* LAYOUT */
 .wrap {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -33,7 +33,7 @@ img {
   margin-top: 1.25rem;
 }
 
-/* ================= BENTO ================= */
+/* BENTO */
 .bento {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
   border-radius: var(--radius);
@@ -95,7 +95,7 @@ img {
   color: white;
 }
 
-/* ================= MINI GRID ================= */
+/* mini-grid */
 .grid-mini {
   grid-column: 1 / -1;
   display: grid;
